@@ -9,10 +9,8 @@ For details on the pretrained foundational model, check out [HuggingFace: `joera
 
 <!-- This submission adds custom preprocessing to the reports: HTML tags and links are removed. -->
 
-If you are using this codebase or some part of it, please cite the following article:
-PENDING
+If you are using DRAGON resources, please cite the following article:
 
-**BibTeX:**
-```
-PENDING
-```
+> J. S. Bosma, …, H. Huisman for the DRAGON Consortium. The DRAGON benchmark for clinical NLP. *npj Digital Medicine* 8, 289 (2025). [https://doi.org/10.1038/s41746-025-01626-x](https://doi.org/10.1038/s41746-025-01626-x)
+
+Download the citation file for your reference manager: [BibTeX](https://github.com/DIAGNijmegen/dragon/blob/main/citation.bib) | [RIS](https://github.com/DIAGNijmegen/dragon/blob/main/citation.ris)
