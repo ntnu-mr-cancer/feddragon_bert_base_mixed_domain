@@ -32,7 +32,7 @@ do
         --pids-limit="256" \
         -v $SCRIPTPATH/test-input/$jobname:/input:ro \
         -v dragon-output-$VOLUME_SUFFIX:/output \
-        joeranbosma/dragon_submission
+        skarrea/dragon_submission
 
     # Display the output file
     docker run --rm \
@@ -54,7 +54,7 @@ docker run --rm \
     -v dragon-output-$VOLUME_SUFFIX:/input:ro \
     -v $SCRIPTPATH/test-ground-truth:/opt/app/ground-truth \
     --entrypoint python \
-    joeranbosma/dragon_submission -m dragon_eval --folds 0
+    skarrea/dragon_submission -m dragon_eval --folds 0
 
 docker volume rm dragon-output-$VOLUME_SUFFIX
 

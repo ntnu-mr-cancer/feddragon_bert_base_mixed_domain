@@ -1,8 +1,7 @@
 import re
 from typing import List, Union
-
 from dragon_baseline import DragonBaseline
-
+from transformers import EarlyStoppingCallback
 
 class DragonSubmission(DragonBaseline):
     def __init__(self, **kwargs):
@@ -12,13 +11,35 @@ class DragonSubmission(DragonBaseline):
         Note: when changing the model, update the Dockerfile to pre-download that model.
         """
         super().__init__(**kwargs)
-        self.model_name = "joeranbosma/dragon-roberta-base-mixed-domain"
-        self.per_device_train_batch_size = 4
-        self.gradient_accumulation_steps = 2
+        # self.model_name_or_path = "joeranbosma/dragon-roberta-large-domain-specific"
+        self.model_name_or_path = "joeranbosma/dragon-bert-base-mixed-domain"
+        self.per_device_train_batch_size = 8
+        self.gradient_accumulation_steps = 1
         self.gradient_checkpointing = False
         self.max_seq_length = 512
         self.learning_rate = 1e-05
-        self.num_train_epochs = 5
+        self.num_train_epochs = 15
+
+        self.model_kwargs.update({
+             "lr_scheduler_type": "constant",
+             "save_total_limit": 1,
+             "warmup_ratio": 0,
+
+             # precision/math
+             "optim": "adamw_torch_fused",
+             "use_liger_kernel" : True,
+             "fp16" : True,
+
+             # logging/checkpointing
+             "logging_steps": 1000,
+             "save_strategy": "best",
+             "save_only_model": True,
+             "load_best_model_at_end": True,
+             "metric_for_best_model": "dragon",
+             "greater_is_better": True,
+
+         })
+        # self.update_default_training_settings(self.model_kwargs)
 
     def custom_text_cleaning(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
         """
@@ -52,4 +73,10 @@ class DragonSubmission(DragonBaseline):
 
 
 if __name__ == "__main__":
-    DragonSubmission().process()
+    mdl = DragonSubmission()
+    mdl.setup()
+    mdl.trainer.add_callback(EarlyStoppingCallback(early_stopping_patience=3, early_stopping_threshold=0.01))
+    mdl.train()
+    predictions = mdl.predict(df=mdl.df_test)
+    mdl.save(predictions)
+    mdl.verify_predictions()

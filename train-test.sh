@@ -38,7 +38,7 @@ do
         --pids-limit="256" \
         -v $SCRIPTPATH/test-input/$jobname:/input:ro \
         -v $SCRIPTPATH/test-output/$jobname:/output \
-        joeranbosma/dragon_submission:latest
+        skarrea/dragon_submission:latest
 
     docker run --rm \
         -v $SCRIPTPATH/test-output/$jobname:/output/ \

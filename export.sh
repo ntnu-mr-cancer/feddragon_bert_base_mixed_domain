@@ -2,4 +2,4 @@
 
 ./build.sh
 
-docker save joeranbosma/dragon_submission:latest | gzip -c > dragon_submission.tar.gz
+docker save skarrea/dragon_submission:latest | gzip -c > dragon_submission.tar.gz

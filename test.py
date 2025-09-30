@@ -1,7 +1,5 @@
 from pathlib import Path
-
 from dragon_eval import DragonEval
-
 from process import DragonSubmission
 
 if __name__ == "__main__":

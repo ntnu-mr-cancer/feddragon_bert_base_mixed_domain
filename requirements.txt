@@ -44,9 +44,7 @@ dill==0.3.8
     #   datasets
     #   evaluate
     #   multiprocess
-dragon-baseline==0.4.1
-    # via -r requirements.in
-dragon-eval==0.2.4
+dragon-eval==0.2.9
     # via -r requirements.in
 evaluate==0.4.3
     # via dragon-baseline
@@ -282,7 +280,7 @@ xxhash==3.5.0
     #   evaluate
 yarl==1.18.3
     # via aiohttp
-
+liger_kernel==0.6.2
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools

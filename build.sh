@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-docker build -t joeranbosma/dragon_submission:latest "$SCRIPTPATH"
+docker build -t skarrea/dragon_submission:latest "$SCRIPTPATH"
